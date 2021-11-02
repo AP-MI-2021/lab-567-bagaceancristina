@@ -1,10 +1,13 @@
 from domain.cheltuiala2 import get_cheltuiala
 from logic.crud import create, update, delete
+from logic.majorare_cheltuieli import majorare
+from logic.stergere_cheltuieli import del_chelt_apartament
 
 
 def show_menu():
     print('1.CRUD')
-    print('2.restu')
+    print('2.Stergerea cheltuielilor unui apartament dat.')
+    print('3.Adunarea unei valori la toate cheltuielile dintr-o dată citită.')
     print('x.Exit')
 
 def handle_add(cheltuieli):
@@ -62,6 +65,10 @@ def run_ui(cheltuieli):
         optiune = input('Optiunea aleasa: ')
         if optiune == '1':
             cheltuieli = handle_crud(cheltuieli)
+        elif optiune == '2':
+            cheltuieli = del_chelt_apartament(cheltuieli)
+        elif optiune == '3':
+            cheltuieli = majorare(cheltuieli)
         elif optiune == 'x':
             break
         else :
