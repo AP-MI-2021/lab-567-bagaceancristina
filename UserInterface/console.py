@@ -66,9 +66,12 @@ def run_ui(cheltuieli):
         if optiune == '1':
             cheltuieli = handle_crud(cheltuieli)
         elif optiune == '2':
-            cheltuieli = del_chelt_apartament(cheltuieli)
+            apartament = int(input("Introduceti numarul apartamentului a caror cheltuieli doriti sa le stergeti : "))
+            cheltuieli = del_chelt_apartament(cheltuieli, apartament)
         elif optiune == '3':
-            cheltuieli = majorare(cheltuieli)
+            data = input("Introduceti data in care doriti sa majorati cheltuielile :")
+            suma = float(input("Introduceti suma cu care doriti sa majorati cheltuielile :"))
+            cheltuieli = majorare(cheltuieli, data, suma)
         elif optiune == 'x':
             break
         else :
