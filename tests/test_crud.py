@@ -19,6 +19,13 @@ def test_create():
     assert len(new_cheltuieli) == len(cheltuieli) + 1
 
     assert c_new in new_cheltuieli
+    params2 = (5, 8, 605, '30.06.2002', 'curent')
+    try:
+        _ = create(new_cheltuieli, *params2)
+        assert False
+    except ValueError:
+        assert True
+
 
 
 def test_read():

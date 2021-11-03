@@ -11,12 +11,17 @@ def show_menu():
     print('x.Exit')
 
 def handle_add(cheltuieli):
-    id = int (input('Dati id-ul cheltuielii: '))
-    nr_ap = int (input('Dati numarul apartamentului: '))
-    suma = float (input('Dati suma cheltuielii: '))
-    data = input('Dati data emiterii cheltuielii: ')
-    tipul = input('Dati tipul cheltuielii: ')
-    return create(cheltuieli, id, nr_ap, suma, data, tipul)
+    try:
+        id = int (input('Dati id-ul cheltuielii: '))
+        nr_ap = int (input('Dati numarul apartamentului: '))
+        suma = float (input('Dati suma cheltuielii: '))
+        data = input('Dati data emiterii cheltuielii: ')
+        tipul = input('Dati tipul cheltuielii: ')
+        return create(cheltuieli, id, nr_ap, suma, data, tipul)
+    except ValueError as ve:
+        print('Eroare:', ve)
+
+    return cheltuieli
 
 
 def handle_show_all(cheltuieli):

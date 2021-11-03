@@ -12,6 +12,8 @@ def create(lst_cheltuieli:list, id, nr_ap, suma, data, tip):
     :param tip: tipul cheltuielilor
     :return:
     '''
+    if read(lst_cheltuieli,id) is not None:
+        raise ValueError(f'Exista deja o cheltuiala cu id-ul {id}')
     cheltuiala = creeaza_cheltuiala(id,nr_ap,suma,data,tip)
     return lst_cheltuieli + [cheltuiala]
 
@@ -21,8 +23,12 @@ def read(lst_cheltuieli, id_cheltuiala: int=None):
     citeste cheltuielile unui apartament
     :param lst_cheltuieli: lista cheltuieli
     :param id_cheltuiala: id-ul  apartamentului
-    :return: apartamentum cu id-ul id_cheltuiala sau lista cu toate apartamentele daca id_cheltuiala=None
+    :return: apartamentum cu id-ul id_cheltuiala
+            lista cu toate apartamentele daca id_cheltuiala=None
+            None daca nu cheltuiala cu ud_cheltuiala
     '''
+    if not id_cheltuiala:
+        return lst_cheltuieli
     cheltuiala_x = None
     for cheltuiala in lst_cheltuieli:
         if get_id(cheltuiala) == id_cheltuiala:
@@ -30,7 +36,8 @@ def read(lst_cheltuieli, id_cheltuiala: int=None):
 
     if cheltuiala_x:
         return cheltuiala_x
-    return lst_cheltuieli
+    else:
+        return None
 
 
 def delete(lst_cheltuieli, id_cheltuiala):
