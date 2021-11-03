@@ -1,5 +1,7 @@
 from domain.cheltuiala2 import creeaza_cheltuiala, get_cheltuiala
 from logic.crud import read, delete, update, create
+from logic.majorare_cheltuieli import majorare
+from logic.stergere_cheltuieli import del_chelt_apartament
 
 
 def handle_showall(lst_cheltuieli):
@@ -45,6 +47,25 @@ def handle_stergere(lst_cheltuiala_stearsa, lst_cheltuieli):
     return lst_cheltuieli
 
 
+def handle_majorare(lst_informatii, lst_cheltuieli):
+    try:
+        data = lst_informatii[1]
+        suma = float(lst_informatii[2])
+        lst_cheltuieli = majorare(lst_cheltuieli,data,suma)
+    except ValueError as ve:
+        print('Eroare', ve)
+    return lst_cheltuieli
+
+
+def handle_zero(lista_informatii,lst_cheltuieli):
+    try:
+        ap = int(lista_informatii[1])
+        lst_cheltuieli = del_chelt_apartament(lst_cheltuieli,ap)
+    except ValueError as ve:
+        print('Eroare', ve)
+    return lst_cheltuieli
+
+
 def show_menu():
     print(
         """
@@ -53,8 +74,11 @@ def show_menu():
         Stergere cheltuiala -delete- :id_cheltuiala
         Modificare cheltuiala -update- :id_cheltuiala, nr_apartament, suma, data, tipul
         Afisare cheltuieli -showall-
+        Majorare cheltuieli -plus- :data, suma
+        Sterge toate cheltuielile unui apartament -zero- : nr_apartament
         Iesire -exit-
         """)
+
 
 def console2():
     lst_cheltuieli = []
@@ -78,6 +102,10 @@ def console2():
                     lst_cheltuieli = handle_modificare(lst_cheltuieli_comanda,lst_cheltuieli)
                 elif lst_cheltuieli_comanda[0] == "showall":
                     handle_showall(lst_cheltuieli)
+                elif lst_cheltuieli_comanda[0] == "plus":
+                    lst_cheltuieli = handle_majorare(lst_cheltuieli_comanda,lst_cheltuieli)
+                elif lst_cheltuieli_comanda[0] == "zero":
+                    lst_cheltuieli = handle_zero(lst_cheltuieli_comanda,lst_cheltuieli)
                 elif lst_cheltuieli_comanda[0] == "exit":
                     done = True
                 else:
