@@ -29,17 +29,26 @@ def handle_show_all(cheltuieli):
         print(get_cheltuiala(c))
 
 def handle_update(cheltuieli):
-    id = int(input('Dati id-ul cheltuielii care se modifica: '))
-    nr_ap = int(input('Dati noul numarul apartamentului: '))
-    suma = float(input('Dati noua suma cheltuielii: '))
-    data = input('Dati noua data de emiterie a cheltuielii: ')
-    tipul = input('Dati noul tip de cheltuiala: ')
-    return update(cheltuieli, id, nr_ap, suma, data, tipul)
+    try:
+        id = int(input('Dati id-ul cheltuielii care se modifica: '))
+        nr_ap = int(input('Dati noul numarul apartamentului: '))
+        suma = float(input('Dati noua suma cheltuielii: '))
+        data = input('Dati noua data de emiterie a cheltuielii: ')
+        tipul = input('Dati noul tip de cheltuiala: ')
+        return update(cheltuieli, id, nr_ap, suma, data, tipul)
+    except ValueError as ve:
+        print('Eroare', ve)
+    return cheltuieli
 
 
 def handle_delete(cheltuieli):
-    id = int(input('Dati id-ul cheltuielii care se va sterge: '))
-    return delete(cheltuieli, id)
+    try:
+        id = int(input('Dati id-ul cheltuielii care se va sterge: '))
+        return delete(cheltuieli, id)
+    except ValueError as ve:
+        print('Eroare', ve)
+    return cheltuieli
+
 
 def handle_crud(cheltuieli):
     while True:

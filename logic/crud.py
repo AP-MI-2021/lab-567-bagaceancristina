@@ -47,6 +47,8 @@ def delete(lst_cheltuieli, id_cheltuiala):
     :param id_cheltuiala: id-ul cheltuielii
     :return:
     '''
+    if read(lst_cheltuieli,id_cheltuiala) is None:
+        raise ValueError(f'Nu exista o cheltuiala cu id-ul {id_cheltuiala} pe care sa o stergem')
     new_cheltuieli = []
     for cheltuiala in lst_cheltuieli:
         if get_id(cheltuiala) != id_cheltuiala:
@@ -61,6 +63,8 @@ def update(lst_cheltuieli, cheltuiala):
     :param cheltuiala: prajitura care se va modifica (existenta)
     :return: o lista cu prajitura actualizata
     '''
+    if read(lst_cheltuieli,get_id(cheltuiala)) is None:
+        raise ValueError(f'Nu exista o cheltuiala cu id-ul {get_id(cheltuiala)}')
     new_cheltuieli=[]
     for chelt in lst_cheltuieli:
         if get_id(chelt) != get_id(cheltuiala):
