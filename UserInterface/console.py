@@ -1,6 +1,7 @@
 from domain.cheltuiala2 import get_cheltuiala
 from logic.crud import create, update, delete
 from logic.majorare_cheltuieli import majorare
+from logic.max_cheltuieli_tip import get_max_chelt_tip
 from logic.stergere_cheltuieli import del_chelt_apartament
 
 
@@ -8,7 +9,9 @@ def show_menu():
     print('1.CRUD')
     print('2.Stergerea cheltuielilor unui apartament dat.')
     print('3.Adunarea unei valori la toate cheltuielile dintr-o dată citită.')
+    print('4.Afisarea celei mai scumpe cheltuieli pentru fiecare tip de cheltuiala.')
     print('x.Exit')
+
 
 def handle_add(cheltuieli):
     try:
@@ -27,6 +30,7 @@ def handle_add(cheltuieli):
 def handle_show_all(cheltuieli):
     for c in cheltuieli:
         print(get_cheltuiala(c))
+
 
 def handle_update(cheltuieli):
     try:
@@ -48,6 +52,28 @@ def handle_delete(cheltuieli):
     except ValueError as ve:
         print('Eroare', ve)
     return cheltuieli
+
+
+def handle_del_chelt_ap(cheltuieli):
+    apartament = int(input("Introduceti numarul apartamentului a caror cheltuieli doriti sa le stergeti : "))
+    result = del_chelt_apartament(cheltuieli, apartament)
+    print('Stergerea a fost efectuata.')
+    print(result)
+    return result
+
+
+def handle_majorare(cheltuieli):
+    data = input("Introduceti data in care doriti sa majorati cheltuielile :")
+    suma = float(input("Introduceti suma cu care doriti sa majorati cheltuielile :"))
+    result = majorare(cheltuieli, data, suma)
+    print('Majorarea a fost efectuata.')
+    print(result)
+    return result
+
+
+def handle_max_chelt_tip(cheltuieli):
+    result = get_max_chelt_tip(cheltuieli)
+    print(result)
 
 
 def handle_crud(cheltuieli):
@@ -73,6 +99,7 @@ def handle_crud(cheltuieli):
             print('Optiune invalida')
     return cheltuieli
 
+
 def run_ui(cheltuieli):
     while True:
         show_menu()
@@ -80,15 +107,14 @@ def run_ui(cheltuieli):
         if optiune == '1':
             cheltuieli = handle_crud(cheltuieli)
         elif optiune == '2':
-            apartament = int(input("Introduceti numarul apartamentului a caror cheltuieli doriti sa le stergeti : "))
-            cheltuieli = del_chelt_apartament(cheltuieli, apartament)
+            cheltuieli = handle_del_chelt_ap(cheltuieli)
         elif optiune == '3':
-            data = input("Introduceti data in care doriti sa majorati cheltuielile :")
-            suma = float(input("Introduceti suma cu care doriti sa majorati cheltuielile :"))
-            cheltuieli = majorare(cheltuieli, data, suma)
+            cheltuieli = handle_majorare(cheltuieli)
+        elif optiune == '4':
+            handle_max_chelt_tip(cheltuieli)
         elif optiune == 'x':
             break
-        else :
+        else:
             print('Optiune invaida')
 
     return cheltuieli

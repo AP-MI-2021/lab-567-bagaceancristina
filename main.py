@@ -7,13 +7,13 @@ from tests.test_stergere_cheltuieli import test_stergere_cheltuieli
 
 def main():
     cheltuieli = []
-    #cheltuieli = run_ui(cheltuieli)
+    cheltuieli = run_ui(cheltuieli)
     #cheltuieli = console2(cheltuieli)
 
 if __name__ == '__main__':
     test_crud()
     test_majorare()
     test_stergere_cheltuieli()
-    #main()
-    console2()
+    main()
+    #console2()
 
