@@ -4,6 +4,7 @@ from logic.majorare_cheltuieli import majorare
 from logic.max_cheltuieli_tip import get_max_chelt_tip
 from logic.ordonare_pret import ordonare_suma
 from logic.stergere_cheltuieli import del_chelt_apartament
+from logic.sume_pt_fiecare_ap import get_sume_per_apartament
 
 
 def show_menu():
@@ -12,6 +13,7 @@ def show_menu():
     print('3.Adunarea unei valori la toate cheltuielile dintr-o dată citită.')
     print('4.Afisarea celei mai scumpe cheltuieli pentru fiecare tip de cheltuiala.')
     print('5.Ordonarea cheltuielilor in functie de suma.')
+    print('6.Afișarea sumelor lunare pentru fiecare apartament.')
     print('x.Exit')
 
 
@@ -90,6 +92,12 @@ def handle_ordonare(cheltuieli):
     result = ordonare_suma(cheltuieli)
     handle_show_all(result)
 
+
+def handle_sume_pt_fiecare_ap(cheltuieli):
+    result = get_sume_per_apartament(cheltuieli)
+    print(result)
+
+
 def handle_crud(cheltuieli):
     while True:
         print('1. Adaugare')
@@ -128,6 +136,8 @@ def run_ui(cheltuieli):
             handle_max_chelt_tip(cheltuieli)
         elif optiune == '5':
             handle_ordonare(cheltuieli)
+        elif optiune == '6':
+            handle_sume_pt_fiecare_ap(cheltuieli)
         elif optiune == 'x':
             break
         else:
