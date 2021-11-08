@@ -139,8 +139,6 @@ def handle_crud(cheltuieli, undo_list, redo_list):
     return cheltuieli
 
 
-
-
 def run_ui(cheltuieli, undo_list, redo_list):
     while True:
         show_menu()

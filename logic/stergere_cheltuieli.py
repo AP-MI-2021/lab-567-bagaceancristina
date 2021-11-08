@@ -6,6 +6,8 @@ def del_chelt_apartament(cheltuieli, apartament, undo_list, redo_list):
     '''
     sterge cheltuielile unui apartament dat
     :param cheltuieli: lista de cheltuieli
+    :param undo_list: lista pentru undo
+    :param redo_list: lista pentru redo
     :return: noua lista de cheltuieli
     '''
     for c in cheltuieli:
