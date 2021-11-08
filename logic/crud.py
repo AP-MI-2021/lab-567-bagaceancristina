@@ -1,7 +1,7 @@
 from domain.cheltuiala2 import creeaza_cheltuiala, get_id
 
 
-def create(lst_cheltuieli:list, id, nr_ap, suma, data, tip):
+def create(lst_cheltuieli:list, id, nr_ap, suma, data, tip, undo_list:list, redo_list:list):
     '''
     creeaza o lista de cheltuieli
     :param lst_cheltuieli: lista de cheltuieli
@@ -10,10 +10,14 @@ def create(lst_cheltuieli:list, id, nr_ap, suma, data, tip):
     :param suma: suma de plata
     :param data: data emiterii cheltuielilor
     :param tip: tipul cheltuielilor
+    :param undo_list: lista pentru undo
+    :param redo_list: lista pentru redo
     :return:
     '''
     if read(lst_cheltuieli,id) is not None:
         raise ValueError(f'Exista deja o cheltuiala cu id-ul {id}')
+    undo_list.append(lst_cheltuieli)
+    redo_list.clear()
     cheltuiala = creeaza_cheltuiala(id,nr_ap,suma,data,tip)
     return lst_cheltuieli + [cheltuiala]
 
@@ -40,11 +44,13 @@ def read(lst_cheltuieli, id_cheltuiala: int=None):
         return None
 
 
-def delete(lst_cheltuieli, id_cheltuiala):
+def delete(lst_cheltuieli, id_cheltuiala, undo_list:list, redo_list:list):
     '''
     sterge cheltuiala cu id-ul id_cheltuiala
     :param lst_cheltuieli: lista heltuieli
     :param id_cheltuiala: id-ul cheltuielii
+    :param undo_list: lista pentru undo
+    :param redo_list: lista pentru redo
     :return:
     '''
     if read(lst_cheltuieli,id_cheltuiala) is None:
@@ -53,14 +59,18 @@ def delete(lst_cheltuieli, id_cheltuiala):
     for cheltuiala in lst_cheltuieli:
         if get_id(cheltuiala) != id_cheltuiala:
             new_cheltuieli.append(cheltuiala)
+    undo_list.append(lst_cheltuieli)
+    redo_list.clear()
     return new_cheltuieli
 
 
-def update(lst_cheltuieli, cheltuiala):
+def update(lst_cheltuieli, cheltuiala, undo_list:list, redo_list:list):
     '''
     actualizeaza o prajitura
     :param lst_cheltuieli: lista de prajituri
     :param cheltuiala: prajitura care se va modifica (existenta)
+    :param undo_list: lista pentru undo
+    :param redo_list: lista pentru redo
     :return: o lista cu prajitura actualizata
     '''
     if read(lst_cheltuieli,get_id(cheltuiala)) is None:
@@ -71,6 +81,8 @@ def update(lst_cheltuieli, cheltuiala):
             new_cheltuieli.append(chelt)
         else:
             new_cheltuieli.append(cheltuiala)
+    undo_list.append(lst_cheltuieli)
+    redo_list.clear()
     return new_cheltuieli
 
 

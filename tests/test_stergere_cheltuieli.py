@@ -12,5 +12,5 @@ def get_data():
 def test_stergere_cheltuieli():
     cheltuieli = get_data()
     apartament = 1
-    new_cheltuieli = del_chelt_apartament(cheltuieli, apartament)
+    new_cheltuieli = del_chelt_apartament(cheltuieli, apartament, [], [])
     assert len(cheltuieli) != len(new_cheltuieli)

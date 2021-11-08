@@ -13,13 +13,13 @@ def get_data():
 
 def test_create():
     cheltuieli = get_data()
-    params = (5, 3, 65, '30.06.2002', 'curent')
-    c_new = creeaza_cheltuiala(*params)
+    params = (5, 3, 65, '30.06.2002', 'curent',[] ,[])
+    c_new = creeaza_cheltuiala(*params[:-2])
     new_cheltuieli = create(cheltuieli, *params)
     assert len(new_cheltuieli) == len(cheltuieli) + 1
 
     assert c_new in new_cheltuieli
-    params2 = (5, 8, 605, '30.06.2002', 'curent')
+    params2 = (5, 8, 605, '30.06.2002', 'curent', [], [])
     try:
         _ = create(new_cheltuieli, *params2)
         assert False
@@ -38,7 +38,7 @@ def test_read():
 def test_update():
     cheltuieli = get_data()
     c_updated = creeaza_cheltuiala(1, 7, 44, '07.01.2002', 'reparatii')
-    updated = update(cheltuieli, c_updated)
+    updated = update(cheltuieli, c_updated, [], [])
     assert c_updated in updated
     assert c_updated not in cheltuieli
     assert len(updated) == len(cheltuieli)
@@ -48,7 +48,7 @@ def test_delete():
     cheltuieli = get_data()
     to_delete = 3
     c_deleted = read(cheltuieli, to_delete)
-    deleted = delete(cheltuieli, to_delete)
+    deleted = delete(cheltuieli, to_delete, [], [])
     assert c_deleted not in deleted
     assert c_deleted in cheltuieli
     assert len(deleted) == len(cheltuieli) - 1
