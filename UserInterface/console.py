@@ -1,4 +1,4 @@
-from domain.cheltuiala2 import get_cheltuiala
+from domain.cheltuiala2 import get_cheltuiala, creeaza_cheltuiala
 from logic.crud import create, update, delete
 from logic.majorare_cheltuieli import majorare
 from logic.max_cheltuieli_tip import get_max_chelt_tip
@@ -22,9 +22,9 @@ def show_menu():
 
 def handle_add(cheltuieli, undo_list, redo_list):
     try:
-        id = int (input('Dati id-ul cheltuielii: '))
-        nr_ap = int (input('Dati numarul apartamentului: '))
-        suma = float (input('Dati suma cheltuielii: '))
+        id = int(input('Dati id-ul cheltuielii: '))
+        nr_ap = int(input('Dati numarul apartamentului: '))
+        suma = float(input('Dati suma cheltuielii: '))
         data = input('Dati data emiterii cheltuielii: ')
         tipul = input('Dati tipul cheltuielii: ')
         return create(cheltuieli, id, nr_ap, suma, data, tipul, undo_list, redo_list)
@@ -42,11 +42,12 @@ def handle_show_all(cheltuieli):
 def handle_update(cheltuieli, undo_list, redo_list):
     try:
         id = int(input('Dati id-ul cheltuielii care se modifica: '))
-        nr_ap = int(input('Dati noul numarul apartamentului: '))
-        suma = float(input('Dati noua suma cheltuielii: '))
-        data = input('Dati noua data de emiterie a cheltuielii: ')
-        tipul = input('Dati noul tip de cheltuiala: ')
-        return update(cheltuieli, id, nr_ap, suma, data, tipul, undo_list, redo_list)
+        nr_ap = int(input('Dati numarul apartamentului: '))
+        suma = float(input('Dati suma cheltuielii: '))
+        data = input('Dati data emiterii cheltuielii: ')
+        tipul = input('Dati tipul cheltuielii: ')
+        cheltuiala = creeaza_cheltuiala(id, nr_ap, suma, data, tipul)
+        return update(cheltuieli, cheltuiala, undo_list, redo_list)
     except ValueError as ve:
         print('Eroare', ve)
     return cheltuieli
@@ -102,14 +103,14 @@ def handle_sume_pt_fiecare_ap(cheltuieli):
 
 
 def handle_undo(cheltuieli, undo_list, redo_list):
-    undo_result = do_undo(undo_list, redo_list)
+    undo_result = do_undo(undo_list, redo_list, cheltuieli)
     if undo_result is not None:
         return undo_result
     return cheltuieli
 
 
 def handle_redo(cheltuieli, undo_list, redo_list):
-    redo_result = do_redo(undo_list, redo_list)
+    redo_result = do_redo(undo_list, redo_list, cheltuieli)
     if redo_result is not None:
         return redo_result
     return cheltuieli

@@ -95,17 +95,17 @@ def console2():
                 for detalii in comanda:
                     lst_cheltuieli_comanda.append(detalii)
                 if lst_cheltuieli_comanda[0] == "add":
-                    lst_cheltuieli = handle_adaugare(lst_cheltuieli_comanda,lst_cheltuieli)
+                    lst_cheltuieli = handle_adaugare(lst_cheltuieli_comanda, lst_cheltuieli)
                 elif lst_cheltuieli_comanda[0] == "delete":
-                    lst_cheltuieli = handle_stergere(lst_cheltuieli_comanda,lst_cheltuieli)
+                    lst_cheltuieli = handle_stergere(lst_cheltuieli_comanda, lst_cheltuieli)
                 elif lst_cheltuieli_comanda[0] == "update":
-                    lst_cheltuieli = handle_modificare(lst_cheltuieli_comanda,lst_cheltuieli)
+                    lst_cheltuieli = handle_modificare(lst_cheltuieli_comanda, lst_cheltuieli)
                 elif lst_cheltuieli_comanda[0] == "showall":
                     handle_showall(lst_cheltuieli)
                 elif lst_cheltuieli_comanda[0] == "plus":
-                    lst_cheltuieli = handle_majorare(lst_cheltuieli_comanda,lst_cheltuieli)
+                    lst_cheltuieli = handle_majorare(lst_cheltuieli_comanda, lst_cheltuieli)
                 elif lst_cheltuieli_comanda[0] == "zero":
-                    lst_cheltuieli = handle_zero(lst_cheltuieli_comanda,lst_cheltuieli)
+                    lst_cheltuieli = handle_zero(lst_cheltuieli_comanda, lst_cheltuieli)
                 elif lst_cheltuieli_comanda[0] == "exit":
                     done = True
                 else:

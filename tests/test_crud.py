@@ -27,7 +27,6 @@ def test_create():
         assert True
 
 
-
 def test_read():
     cheltuieli = get_data()
     some_c = cheltuieli[2]
@@ -52,6 +51,7 @@ def test_delete():
     assert c_deleted not in deleted
     assert c_deleted in cheltuieli
     assert len(deleted) == len(cheltuieli) - 1
+
 
 def test_crud():
     test_create()

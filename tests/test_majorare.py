@@ -9,11 +9,12 @@ def get_data():
         creeaza_cheltuiala(3, 7, 102.8, '02.01.2002', 'apa'),
         creeaza_cheltuiala(4, 9, 77, '19.08.2002', 'lumina')
     ]
+
+
 def test_majorare():
     cheltuieli = get_data()
     data = "22.12.2002"
     plus = 1.1
-    new_cheltuieli =[]
-    new_cheltuieli = majorare(cheltuieli,data,plus)
+    new_cheltuieli = majorare(cheltuieli, data, plus)
     assert get_suma(cheltuieli[1]) != get_suma(new_cheltuieli[1])
     assert get_suma(cheltuieli[3]) == get_suma(new_cheltuieli[3])
